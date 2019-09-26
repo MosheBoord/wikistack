@@ -5,8 +5,10 @@ module.exports = {
         allowNull: false
     },
     email: {
-            type: Sequelize.STRING,
-            primaryKey: true
-
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+            isEmail: true
         }
-}
+    }
+};
