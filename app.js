@@ -2,16 +2,11 @@ const express = require("express");
 const morgan = require("morgan");
 const Sequelize = require("sequelize");
 const { db } = require("./models");
-
+const users = require('./models/user');
 const app = express();
+app.use(morgan('dev'));
 
-const User = db.define("User", {
-    name: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    email: Sequelize.STRING
-});
+const User = db.define("User", users);
 
 db.authenticate().
     then(() => {
