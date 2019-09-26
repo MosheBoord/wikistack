@@ -3,10 +3,21 @@ const morgan = require("morgan");
 const Sequelize = require("sequelize");
 const { db } = require("./models");
 const users = require('./models/user');
+const pages = require('./models/page');
+
 const app = express();
 app.use(morgan('dev'));
 
 const User = db.define("User", users);
+const Page = db.define('Page', pages);
+
+(async () => {
+   await User.sync({force: true});
+   await Page.sync({force: true});
+   const port = 1300;
+   app.listen(port);
+})();
+
 
 db.authenticate().
     then(() => {
@@ -20,5 +31,4 @@ app.get("/", (req, res) => {
     res.send(require("./views/main.js")());
 });
 
-const port = 1300;
-app.listen(port);
+

@@ -4,5 +4,9 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
     },
-    email: Sequelize.STRING
+    email: {
+            type: Sequelize.STRING,
+            primaryKey: true
+
+        }
 }
